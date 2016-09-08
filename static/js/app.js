@@ -18,4 +18,14 @@
 	app.controller('StoreController', function(){
 		this.products = gems;
 	});
+
+	app.controller('TabsController', function(){
+		this.isSelectedTab = function(checkTab){
+			return this.tab === checkTab;
+		};
+		this.selectTab = function(setTab) {
+			this.tab = setTab;
+		};
+		this.tab = 1;
+	});
 })();

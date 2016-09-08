@@ -2,16 +2,38 @@
 <html ng-app="gemStore">
 	<head>
 		<link rel="stylesheet" type="text/css" href="static/css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="static/css/custom.css" />
 	</head>
 	<body ng-controller="StoreController as store">
-		<ul class="list-group">
-			<li class="list-group-item" ng-repeat="product in store.products | orderBy:'-price'">
-				<h3>
-					{{ product.name }}
-					<em class="pull-right">{{ product.price | currency }}</em>
-				</h3>
-			</li>
-		</ul>
+		<div class="list-group-item" ng-repeat="product in store.products">
+			<h3>{{ product.name }}<em class="pull-right">{{ product.price | currency }}</em></h3>
+			<button ng-show="product.canPurchase">Add to Cart</button>
+			<section ng-controller="TabsController as tabsCtrl">
+				<ul class="nav nav-pills">
+					<li ng-class="{ active: tabsCtrl.isSelectedTab(1) }">
+						<a href ng-click="tabsCtrl.selectTab(1)">Description</a>
+					</li>
+					<li ng-class="{ active: tabsCtrl.isSelectedTab(2) }">
+						<a href ng-click="tabsCtrl.selectTab(2)">Specifications</a>
+					</li>
+					<li ng-class="{ active: tabsCtrl.isSelectedTab(3) }">
+						<a href ng-click="tabsCtrl.selectTab(3)">Reviews</a>
+					</li>
+				</ul>
+				<div class="tab" ng-show="tabsCtrl.isSelectedTab(1)">
+					<h4>Description</h4>
+					<p>{{ product.description }}</p>
+				</div>
+				<div class="tab" ng-show="tabsCtrl.isSelectedTab(2)">
+					<h4>Specifications</h4>
+					<blockquote>None yet</blockquote>
+				</div>
+				<div class="tab" ng-show="tabsCtrl.isSelectedTab(3)">
+					<h4>Reviews</h4>
+					<blockquote>None yet</blockquote>
+				</div>
+			</section>
+		    </div>
 		<script type="text/javascript" src="static/js/angular.min.js"></script>
 		<script type="text/javascript" src="static/js/app.js"></script>
 	</body>
