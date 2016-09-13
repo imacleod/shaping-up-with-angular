@@ -30,7 +30,30 @@
 				</div>
 				<div class="tab" ng-show="tabsCtrl.isSelectedTab(3)">
 					<h4>Reviews</h4>
-					<blockquote>None yet</blockquote>
+					<blockquote ng-repeat="review in product.reviews">
+						<b>Stars: {{ review.stars }}</b>
+						{{ review.body }}
+						<cite>by: {{ review.author }}</cite>
+					</blockquote>
+					<form name="reviewForm" ng-controller="ReviewController as reviewCtrl" ng-submit="reviewForm.$valid && reviewCtrl.addReview(product)" novalidate>
+						<blockquote>
+							<b>Stars: {{ reviewCtrl.review.stars }}</b>
+							{{ reviewCtrl.review.body }}
+							<cite>by: {{ reviewCtrl.review.author }} on {{review.createdOn|date}}</cite>
+						</blockquote>
+						<select ng-model="reviewCtrl.review.stars" required>
+							<option value="5">5 stars</option>
+							<option value="4">4 stars</option>
+							<option value="3">3 stars</option>
+							<option value="2">2 stars</option>
+							<option value="1">1 star</option>
+						</select>
+						<textarea ng-model="reviewCtrl.review.body" required></textarea>
+						<label>by:</label>
+						<input ng-model="reviewCtrl.review.author" type="email" required />
+						<div> Valid form: {{ reviewForm.$valid }}</div>
+						<input type="submit" value="Submit" />
+					</form>
 				</div>
 			</section>
 		    </div>
