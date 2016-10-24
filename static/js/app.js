@@ -49,4 +49,11 @@
 		};
 		this.tab = 1;
 	});
+
+	app.directive('productTitle', function() {
+		return {
+			restrict: 'E',
+			templateUrl: 'product-title.html'
+		};
+	});
 })();
